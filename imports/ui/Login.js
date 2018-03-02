@@ -9,6 +9,13 @@ export default class Login extends React.Component {
       error: ''
     };
   }
+  componentDidMount() {
+    // When a user signs in, this code below prevents them from hitting the
+    // browser's back button and going back to login page.
+    if (Meteor.userId()) {
+      this.props.history.replace('/jobs');
+    }
+  }
   onSubmit(e) {
     e.preventDefault();
 
