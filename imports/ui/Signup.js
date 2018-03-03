@@ -33,10 +33,6 @@ export default class Signup extends React.Component {
         this.setState({error: ''});
       }
     });
-
-    // this.setState({
-    //   error: 'Something went wrong'
-    // });
   }
   render() {
     return (
