@@ -1,5 +1,9 @@
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import { Accounts } from 'meteor/accounts-base';
+
+import { Jobs } from '../api/jobs';
+import JobsList from './JobsList.js';
 
 export default class Job extends React.Component {
   componentDidMount() {
@@ -12,11 +16,29 @@ export default class Job extends React.Component {
   onLogout() {
     Accounts.logout();
   }
+  onSubmit(e) {
+    const title = this.refs.title.value.trim();
+
+    e.preventDefault();
+
+    if (title) {
+      // This is client-side code, and this is therefore insecure.
+      // We'll be fixing this in subsequent commits.
+      Jobs.insert({ title, userId: Meteor.userId() });
+      this.refs.title.value = '';
+    }
+  }
   render() {
     return (
       <div>
         <h1>Your Jobs</h1>
         <button onClick={this.onLogout.bind(this)}>Logout</button>
+        <JobsList />
+        <p>Add Job</p>
+        <form onSubmit={this.onSubmit.bind(this)}>
+          <input type="text" ref="title" placeholder="title" />
+          <button>Add Job</button>
+        </form>
       </div>
     );
   }

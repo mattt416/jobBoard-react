@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 import { routes, onAuthChange } from '../imports/routes/routes'
 
+import { Jobs } from '../imports/api/jobs'
+
 Tracker.autorun(() => {
   const isAuthenticated = !!Meteor.userId();
   onAuthChange(isAuthenticated);
