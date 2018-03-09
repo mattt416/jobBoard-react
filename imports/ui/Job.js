@@ -22,9 +22,7 @@ export default class Job extends React.Component {
     e.preventDefault();
 
     if (title) {
-      // This is client-side code, and this is therefore insecure.
-      // We'll be fixing this in subsequent commits.
-      Jobs.insert({ title, userId: Meteor.userId() });
+      Meteor.call('jobs.insert', title);
       this.refs.title.value = '';
     }
   }

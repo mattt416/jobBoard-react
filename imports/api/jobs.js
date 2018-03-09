@@ -11,3 +11,17 @@ if (Meteor.isServer) {
     return Jobs.find({ userId: this.userId });
   });
 }
+
+Meteor.methods({
+  // These two are the same:
+  //'jobs.insert': function() {
+  'jobs.insert'(title) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+    Jobs.insert({
+      title,
+      userId: this.userId
+    });
+  }
+});
