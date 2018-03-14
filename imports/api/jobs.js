@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
+import SimpleSchema from 'simpl-schema';
+
 export const Jobs = new Mongo.Collection('jobs');
 
 if (Meteor.isServer) {
@@ -19,6 +21,11 @@ Meteor.methods({
     if (!this.userId) {
       throw new Meteor.Error('not-authorized');
     }
+    new SimpleSchema({
+      title: {
+        type: String
+      }
+    }).validate({ title });
     Jobs.insert({
       title,
       userId: this.userId
