@@ -23,7 +23,7 @@ export default class JobsList extends React.Component {
   }
   renderJobsListItems() {
     return this.state.jobs.map((job) => {
-      return <p key={job._id}>{job.title}</p>
+      return <p key={job._id}>{job.title} at {job.company}</p>
     });
   }
   render() {

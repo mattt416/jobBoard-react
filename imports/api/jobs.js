@@ -17,17 +17,25 @@ if (Meteor.isServer) {
 Meteor.methods({
   // These two are the same:
   //'jobs.insert': function() {
-  'jobs.insert'(title) {
+  'jobs.insert'(title, description, company) {
     if (!this.userId) {
       throw new Meteor.Error('not-authorized');
     }
     new SimpleSchema({
       title: {
         type: String
+      },
+      description: {
+        type: String
+      },
+      company: {
+        type: String
       }
-    }).validate({ title });
+    }).validate({ title, description, company });
     Jobs.insert({
       title,
+      description,
+      company,
       userId: this.userId
     });
   }
